@@ -23,4 +23,4 @@ target_link_libraries(tests Catch longLCG mpir)
 add_test(NAME Addition COMMAND tests)
 
 #Make running the tests part of the build, so failed test = failed build
-add_custom_command(TARGET tests POST_BUILD COMMAND tests)
+add_custom_command(TARGET tests POST_BUILD COMMAND tests -d yes)

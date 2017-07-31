@@ -1,17 +1,31 @@
 #include "longLCG.hpp"
 
-/*
-LCG_minstd_rand::LCG_minstd_rand(unsigned int seed) {
-	state_vector = seed;
+// initialise with uintmax_t values
+LCG_mpir::LCG_mpir(uintmax_t i_seed, uintmax_t i_mult, uintmax_t i_mod) {
+	mpz_init_set_ux (state_vector, i_seed);
+	mpz_init_set_ux (multiplier, i_mult);
+	mpz_init_set_ux (modulus, i_mod);	
 }
 
-unsigned int LCG_minstd_rand::operator() (){
-	state_vector = (state_vector * multiplier) % modulus;
-	return state_vector;
-
+// initialise with string values in base 10, e.g. "9342632134"
+LCG_mpir::LCG_mpir(const char *str_seed, const char *str_mult, const char *str_mod) {
+	mpz_init_set_str (state_vector, const_cast<char*>(str_seed), 10);
+	mpz_init_set_str (multiplier, const_cast<char*>(str_mult), 10);
+	mpz_init_set_str (modulus, const_cast<char*>(str_mod), 10);
 }
-*/
 
+LCG_mpir::~LCG_mpir() {
+	mpz_clear (state_vector);
+	mpz_clear (multiplier);
+	mpz_clear (modulus);
+}
+
+uintmax_t LCG_mpir::operator() () {
+	// state_vector = (state_vector * multiplier) % modulus;
+	mpz_mul(state_vector, multiplier, state_vector);
+	mpz_mod (state_vector, state_vector, modulus);
+	return mpz_get_ux(state_vector); //return uintmax_t filled with LSBs of state_vector
+}
 //TODO:
 // return the next random double from the generator
 // it lies in the range [0, 1)
