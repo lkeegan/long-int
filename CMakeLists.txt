@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.1)
 project (longLCG)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
+set (CMAKE_CXX_STANDARD 11)
 
 # modules to find MPIR and TestU01 libraries
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
