@@ -14,19 +14,24 @@ install:
   - wget http://mpir.org/mpir-3.0.0.tar.bz2
   - tar -xvjf mpir-3.0.0.tar.bz2
   - cd mpir-3.0.0/
-  - ./configure CC=gcc
+  - ./configure CC=gcc #use gcc because clang is not visible to sudo
   - make -j 2
   - sudo make install
   - cd ../
   # install testu01
   - wget http://simul.iro.umontreal.ca/testu01/TestU01.zip
   - unzip TestU01.zip
-  - cd TestU01-1.2.3/
-  - ./configure CC=gcc
+  - cd TestU01-*/
+  - ./configure CC=gcc #use gcc because clang is not visible to sudo
   - make -j 2
   - sudo make install
   - cd ../
 script:
-  - mkdir build
-  - cd build
-  - cmake .. && make -j 2
+  - mkdir Debug
+  - cd Debug
+  - cmake -DCMAKE_BUILD_TYPE=Debug .. && make -j 2
+  - cd ../
+  - mkdir Release
+  - cd Release
+  - cmake -DCMAKE_BUILD_TYPE=Release .. && make -j 2
+  - cd ../

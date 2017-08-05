@@ -1,4 +1,5 @@
 # longLCG
+[![Build Status](https://travis-ci.org/lkeegan/longLCG.svg?branch=master)](https://travis-ci.org/lkeegan/longLCG)
 A C++ [Linear Congruential Generator (LCG)](https://en.wikipedia.org/wiki/Linear_congruential_generator) to generate pseudorandom numbers which uses arbitrarily long integer arithmetic, using the [mpir](http://mpir.org/) bignum arithmetic library.
 
 ## Background
