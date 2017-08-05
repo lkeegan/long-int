@@ -9,18 +9,24 @@ before_install:
   # install mpir dependencies
   - sudo apt-get -qq update
   - sudo apt-get install -y yasm
-  # install testu01 (bigcrush)
-  - sudo apt-get install -y libtestu01-0 libtestu01-0-dev libtestu01-0-dev-common
 install:
   # install mpir library
   - wget http://mpir.org/mpir-3.0.0.tar.bz2
   - tar -xvjf mpir-3.0.0.tar.bz2
   - cd mpir-3.0.0/
   - ./configure
-  - make 
+  - make -j 2
+  - sudo make install
+  - cd ../
+  # install testu01
+  - wget http://simul.iro.umontreal.ca/testu01/TestU01.zip
+  - unzip TestU01.zip
+  - cd TestU01-1.2.3/
+  - ./configure
+  - make -j 2
   - sudo make install
   - cd ../
 script:
   - mkdir build
   - cd build
-  - cmake .. && make
+  - cmake .. && make -j 2
