@@ -8,7 +8,7 @@ compiler:
 before_install:
   # install mpir dependencies
   - sudo apt-get -qq update
-  - sudo apt-get install -y yasm
+  - sudo apt-get install -y yasm testu01
 install:
   # install mpir library
   - wget http://mpir.org/mpir-3.0.0.tar.bz2
@@ -17,6 +17,7 @@ install:
   - ./configure
   - make 
   - sudo make install
+  - cd ../
 script:
   - mkdir build
   - cd build
