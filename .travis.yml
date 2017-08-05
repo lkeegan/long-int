@@ -10,7 +10,6 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y yasm
 install:
-  - export CC =which $CC
   # install mpir library
   - wget http://mpir.org/mpir-3.0.0.tar.bz2
   - tar -xvjf mpir-3.0.0.tar.bz2
