@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project (longLCG)
 
-# set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # modules to find MPIR and TestU01 libraries
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
@@ -25,7 +25,7 @@ target_link_libraries(longLCG ${MPIR_LIBRARIES})
 add_executable(tests test/main.cpp)
 target_link_libraries(tests Catch longLCG)
 
-# Make TestU01 rng test suite executable
+# Make TestU01 rng test suite executable (optional)
 find_package(TestU01)
 if(TESTU01_FOUND)
 	add_executable(TestU01 testu01.cpp)

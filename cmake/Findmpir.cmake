@@ -1,26 +1,23 @@
 # - Try to find MPIR
 # Once done this will define:
 # MPIR_FOUND - Set to TRUE if we found everything (library, includes)
-# MPIR_INCLUDE_DIR - headers
+# MPIR_INCLUDE_DIRS - headers
 # MPIR_LIBRARIES - libraries
 
-find_path(MPIR_INCLUDE_DIR NAMES mpir.h)
-find_library(MPIR_LIBRARIES NAMES mpir)
+# try to find package using pkg-config (if available)
+find_package(PkgConfig)
+pkg_check_modules(PC_mpir QUIET mpir)
 
-if(MPIR_LIBRARIES AND MPIR_INCLUDE_DIR)
-	set(MPIR_FOUND true)
-endif()
+# look for the include and library paths
+find_path(MPIR_INCLUDE_DIR NAMES mpir.h PATHS ${PC_mpir_INCLUDE_DIRS})
+find_library(MPIR_LIBRARY NAMES mpir PATHS ${PC_mpir_LIBRARY_DIRS})
 
+# set MPIR_FOUND variable and display standard error / success messages
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(mpir DEFAULT_MSG MPIR_LIBRARY MPIR_INCLUDE_DIR)
+
+# set return variables
 if(MPIR_FOUND)
-	if(NOT MPIR_FIND_QUIETLY)
-		message(STATUS "found MPIR header file in ${MPIR_INCLUDE_DIR}")
-		message(STATUS "found MPIR libraries: ${MPIR_LIBRARIES}")
-	endif()
-else(MPIR_FOUND)
-	if(MPIR_FIND_REQUIRED)
-		message(FATAL_ERROR "could not find package MPIR")
-	else(MPIR_FIND_REQUIRED)
-		message(STATUS "optional package MPIR was not found")
-	endif(MPIR_FIND_REQUIRED)
-endif(MPIR_FOUND)
-
+  set(MPIR_LIBRARIES ${MPIR_LIBRARY})
+  set(MPIR_INCLUDE_DIRS ${MPIR_INCLUDE_DIR})
+endif()

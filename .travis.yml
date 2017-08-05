@@ -4,6 +4,15 @@ language:
   - cpp
 compiler:
   - gcc
+  - clang
+install:
+  # install mpir library
+  - wget http://mpir.org/mpir-3.0.0.tar.bz2
+  - tar -xvjf mpir-3.0.0.tar.bz2
+  - cd mpir-3.0.0/
+  - ./configure
+  - make 
+  - sudo make install
 script:
   - mkdir build
   - cd build
