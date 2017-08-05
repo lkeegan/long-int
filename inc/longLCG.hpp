@@ -18,7 +18,6 @@ public:
 		state_vector = (state_vector * multiplier) % modulus;
 		return state_vector;
 	}
-
 };
 
 // simple 64bit integer LCG generator

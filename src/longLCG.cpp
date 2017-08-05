@@ -7,7 +7,7 @@ LCG_mpir::LCG_mpir(uintmax_t i_seed, uintmax_t i_mult, uintmax_t i_mod) {
 	mpz_init_set_ux (modulus, i_mod);	
 }
 
-// initialise with string values in base 10, e.g. "9342632134"
+// initialise with arbitrarily long string values in base 10, e.g. "93426334"
 LCG_mpir::LCG_mpir(const char *str_seed, const char *str_mult, const char *str_mod) {
 	mpz_init_set_str (state_vector, const_cast<char*>(str_seed), 10);
 	mpz_init_set_str (multiplier, const_cast<char*>(str_mult), 10);
