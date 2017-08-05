@@ -1,5 +1,7 @@
 dist: trusty
 sudo: required
+notifications:
+  email: false
 language:
   - cpp
 compiler:
@@ -9,6 +11,8 @@ before_install:
   # install mpir dependencies
   - sudo apt-get -qq update
   - sudo apt-get install -y yasm
+  # install cpp-coverall
+  - pip install --user cpp-coveralls
 install:
   # install mpir library
   - wget http://mpir.org/mpir-3.0.0.tar.bz2
@@ -35,3 +39,5 @@ script:
   - cd Release
   - cmake -DCMAKE_BUILD_TYPE=Release .. && make -j 2
   - cd ../
+after_success:
+  - coveralls
