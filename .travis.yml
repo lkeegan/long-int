@@ -16,7 +16,7 @@ install:
   - cd mpir-3.0.0/
   - ./configure
   - make -j 2
-  - sudo -i make install
+  - sudo -s make install
   - cd ../
   # install testu01
   - wget http://simul.iro.umontreal.ca/testu01/TestU01.zip
@@ -24,7 +24,7 @@ install:
   - cd TestU01-1.2.3/
   - ./configure
   - make -j 2
-  - sudo -i make install
+  - sudo -s make install
   - cd ../
 script:
   - mkdir build
