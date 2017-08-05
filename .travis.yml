@@ -40,4 +40,5 @@ script:
   - cmake -DCMAKE_BUILD_TYPE=Release .. && make -j 2
   - cd ../
 after_success:
-  - coveralls
+  - cd Debug
+  - coveralls -i tests -i src -i inc
